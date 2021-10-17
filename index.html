@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Quiz</title>
+    <link rel="stylesheet" href="./assets/css/style.css" type="text/css">
+</head>
+<body>
+    <header>
+        <a href="./highscores.html">
+            <h3 class="high-score">View high scores</h3>
+        </a>
+        <p>Time: <span class="timer">75</span></p>
+    </header>
+    <main>
+        <section id="start-game">
+            <div>
+                <h1>Coding Quiz Challenge</h1>
+                <p>Try to answer these code-related quiz questions within the time limit. Incorrect answers will penalize your score/time by 10 seconds.</p>
+                <button type="button" class="btn" id="start-btn">Start Game</button>
+            </div>
+        </section>
+        <section id="game" class="hide">
+            <h2 id="question">
+                <!--this is where the question will be rendered.-->
+            </h2>
+            <ol id="answers">
+                <!--this is where the answers will be rendered.-->
+            </ol>
+            <p id="correct">
+                <!--this is where the previous question result will be.-->
+            </p>
+        </section>
+    </main>
+    <script src="./assets/js/script.js"></script>
+</body>
+</html>
