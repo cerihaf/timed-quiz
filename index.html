@@ -12,7 +12,7 @@
         <a href="./highscores.html">
             <h3 class="high-score">View high scores</h3>
         </a>
-        <p>Time: <span class="timer">75</span></p>
+        <p>Time: <span class="timer" id="timer">75</span></p>
     </header>
     <main>
         <section id="start-game">
@@ -32,6 +32,13 @@
             <p id="correct">
                 <!--this is where the previous question result will be.-->
             </p>
+        </section>
+        <section id="end-game" class="hide">
+            <h2>
+                Your Score: <span id="score"></span>
+            </h2>
+            <input type="text" id="username">
+            <button class="btn" id="reset" type="button">Save High Score</button>
         </section>
     </main>
     <script src="./assets/js/script.js"></script>

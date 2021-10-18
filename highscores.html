@@ -12,16 +12,26 @@
         <a href="./index.html">
             <h3 class="high-score">Back to Quiz</h3>
         </a>
-        <h1 bold>High Scores</h1>
+        <h1 class="center">High Scores</h1>
     </header>
-    <main>
-        <ol class="score-list">
-            <li></li>
-            <li></li>
-            <li></li>
-        </ol>
+    <main style="padding: 20px!important;">
+        <ol id="score-list" style="list-style-type: none; text-align: center;"></ol>
     </main>
-    
+    <script>
+       document.addEventListener('DOMContentLoaded', function(){
+        let highScores= []
+            const savedScores = localStorage.getItem("high-scores");
+            highScores = JSON.parse(savedScores);
+            const scores= document.getElementById("score-list")
+            highScores.sort((a, b) => {
+            return b.score - a.score;
+            });
+        for(let i = 0; i < highScores.length; i++) {
+            let li=document.createElement("li")
+            li.innerHTML=`${i + 1}. ${highScores[i].score} ${highScores[i].name}`
+            scores.appendChild(li)
+        }
+       })
+    </script>
 </body>
-<script
 </html>

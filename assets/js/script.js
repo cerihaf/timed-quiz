@@ -4,9 +4,15 @@ const game = document.getElementById('game')
 const answers = document.getElementById('answers')
 const question = document.getElementById('question')
 const correct = document.getElementById('correct')
+const timer = document.getElementById('timer')
+const results = document.getElementById('end-game')
+const score = document.getElementById('score')
+const scoreButton = document.getElementById('reset')
 
+let highScores = []
 let time = 75
 let currentQuestion = 0
+let gameActive= false
 
 
 
@@ -14,7 +20,9 @@ let currentQuestion = 0
 function startGame() {
     beginGame.classList.toggle('hide');
     game.classList.toggle('hide');
+    countdown()
     showQuestion()
+    loadScores()
 }
 
 function nextQuestion(e) {
@@ -27,16 +35,64 @@ function nextQuestion(e) {
     else{
         correct.innerHTML="Correct!"
     }
+    if (currentQuestion!==questions.length-1){
     currentQuestion++
     showQuestion()
+    }
+    else{
+        endGame()
+    }
 }
+
+function endGame() {
+    game.classList.toggle('hide');
+    results.classList.toggle('hide');
+    gameActive=false
+    score.innerHTML=time
+}
+
+function reset(e) {
+    e.preventDefault()
+    let user=document.getElementById('username').value
+    highScores.push({name:user, score:time})
+    saveScores()
+    time=75
+    correct.innerHTML=""
+    currentQuestion=0
+    results.classList.toggle('hide');
+    beginGame.classList.toggle('hide');
+}
+
+function saveScores() {
+    localStorage.setItem("high-scores", JSON.stringify(highScores));
+  };
+  
+function loadScores() {
+    const savedScores = localStorage.getItem("high-scores");
+    if (!savedScores) {
+      return false;
+    }
+    highScores = JSON.parse(savedScores);
+    console.log(highScores)
+  };
 
 
 function countdown() {
-
+    gameActive=true
+    let clock= setInterval(function() {
+        if (time <= 0 ) {
+            clearInterval(clock)
+            endGame();
+        }
+        timer.innerHTML= time;
+       if (gameActive) {
+       time -=1;
+       }
+    }, 1000)
 }
 
 function showQuestion() {
+    answers.innerHTML=""
     let Q = questions[currentQuestion]
     console.log(question)
     question.innerHTML=Q.question
@@ -107,3 +163,4 @@ const questions = [
 
 // Button that starts the timer and quiz
 startButton.addEventListener("click", startGame)
+scoreButton.addEventListener('click', reset)
